@@ -8,42 +8,46 @@ public class RadioTest {
 
     @Test
     void volumeIncreaseTrue() {
-        Radio radio = new Radio(8, 10, 40, 100);
+        Radio radio = new Radio(10);
+        radio.setCurrentVolume(40);
         radio.increaseVolume();
         assertEquals(41, radio.getCurrentVolume());
     }
 
     @Test
     void volumeIncreaseFalse() {
-        Radio radio = new Radio(8, 10, 100, 100);
+        Radio radio = new Radio(10);
+        radio.setCurrentVolume(100);
         radio.increaseVolume();
         assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
     void volumeDecreaseFalse() {
-        Radio radio = new Radio(8, 10, 0, 100);
+        Radio radio = new Radio(10);
         radio.decreaseVolume();
         assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
     void volumeDecreaseTrue() {
-        Radio radio = new Radio(8, 10, 40, 100);
+        Radio radio = new Radio(10);
+        radio.setCurrentVolume(40);
         radio.decreaseVolume();
         assertEquals(39, radio.getCurrentVolume());
     }
 
     @Test
     void radioStationIncrease() {
-        Radio radio = new Radio(8, 10, 40, 100);
+        Radio radio = new Radio(10);
+        radio.setCurrentRadioStation(8);
         radio.increaseRadioStationNumber();
         assertEquals(9, radio.getCurrentRadioStation());
     }
 
     @Test
     void radioStationIncreaseWithReturn() {
-        Radio radio = new Radio(9, 10, 40, 100);
+        Radio radio = new Radio(10);
         int currentRadioStation = 9;
         radio.setCurrentRadioStation(currentRadioStation);
         radio.increaseRadioStationNumber();
@@ -52,7 +56,7 @@ public class RadioTest {
 
     @Test
     void radioStationDecreaseWithReturn() {
-        Radio radio = new Radio(9, 10, 40, 100);
+        Radio radio = new Radio(10);
         int currentRadioStation = 0;
         radio.setCurrentRadioStation(currentRadioStation);
         radio.decreaseRadioStationNumber();
@@ -61,7 +65,7 @@ public class RadioTest {
 
     @Test
     void radioStationDecrease() {
-        Radio radio = new Radio(9, 10, 40, 100);
+        Radio radio = new Radio(10);
         int currentRadioStation = 8;
         radio.setCurrentRadioStation(currentRadioStation);
         radio.decreaseRadioStationNumber();
@@ -70,18 +74,22 @@ public class RadioTest {
 
     @Test
     void setRadioStationAboveLimit() {
-        Radio radio = new Radio(9, 10, 40, 100);
-        int currentRadioStation = 11;
-        radio.setCurrentRadioStation(currentRadioStation);
-        assertEquals(9, radio.getCurrentRadioStation());
+        Radio radio = new Radio(10);
+        radio.setCurrentRadioStation(11);
+        assertEquals(0, radio.getCurrentRadioStation());
     }
 
     @Test
     void setRadioStationBelowLimit() {
-        Radio radio = new Radio(9, 10, 40, 100);
-        int currentRadioStation = -1;
-        radio.setCurrentRadioStation(currentRadioStation);
-        assertEquals(9, radio.getCurrentRadioStation());
+        Radio radio = new Radio(10);
+        radio.setCurrentRadioStation(-1);
+        assertEquals(0, radio.getCurrentRadioStation());
+    }
+
+    @Test
+    void shouldUseNotArgsConstructor() {
+        Radio radio = new Radio();
+        assertEquals(0, radio.getCurrentRadioStation());
     }
 
 }
