@@ -76,7 +76,7 @@ public class RadioTest {
     @Test
     void setRadioStationAboveLimit() {
         Radio radio = new Radio(10);
-        radio.setCurrentRadioStation(11);
+        radio.setCurrentRadioStation(15);
         assertEquals(0, radio.getCurrentRadioStation());
     }
 
@@ -90,13 +90,14 @@ public class RadioTest {
     @Test
     void shouldUseNotArgsConstructor() {
         Radio radio = new Radio();
-        assertEquals(0, radio.getCurrentRadioStation());
+        assertEquals(0, radio.getRadioStationAmount());
     }
 
     @Test
     void shouldUseArgsConstructor() {
-        Radio radio = new Radio(10);
-        assertEquals(10, radio.getRadioStationAmount());
+        Radio radio = new Radio(20);
+        radio.setCurrentRadioStation(15);
+        assertEquals(15, radio.getCurrentRadioStation());
     }
 
 }
